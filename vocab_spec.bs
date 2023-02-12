@@ -1,0 +1,133 @@
+## Classes ## {#classes}
+
+<table class="def">
+  <tr>
+    <th>Name: </th>
+    <td>
+      <dfn data-dfn-type="property" data-export="" id="def-compound" dfn>
+        Compound
+        <a class="self-link" href="#def-compound"></a>
+      </dfn>
+    </td>
+  </tr>
+  <tr>
+    <th>URI: </th>
+    <td>`https://w3id.org/rtc#Compound`</td>
+  </tr>
+  <tr>
+    <th>Description: </th>
+    <td>A compound is a set of triples as an RDF resource.</td>
+  </tr>
+  <tr>
+  <th style="width:6em">In domain of: </th>
+  <td>[=elements=], [=sub-compounds of=]</td>
+</tr>
+<tr>
+  <th style="width:6em">In range of: </th>
+  <td>[=element of=], [=sub-compounds of=]</td>
+</tr>
+
+</table>
+
+
+
+## Properties ## {#properties}
+
+<table class="def">
+  <tr>
+    <th>Name: </th>
+    <td>
+      <dfn data-dfn-type="property" data-export="" id="def-element_of" dfn>
+        element of
+        <a class="self-link" href="#def-element_of"></a>
+      </dfn>
+    </td>
+  </tr>
+  <tr>
+    <th>URI: </th>
+    <td>`https://w3id.org/rtc#elementOf`</td>
+  </tr>
+  <tr>
+    <th>Description: </th>
+    <td>Assigns a triple to a compound as an element. The subject must be a RDF triple.</td>
+  </tr>
+  <tr>
+  <th>Domain: </th>
+  <td>-</td>
+</tr>
+<tr>
+  <th>Range: </th>
+  <td>[=Compound=]</td>
+</tr>
+<tr>
+  <th>Inverse of: </th>
+  <td>[=elements=]</td>
+</tr>
+
+</table>
+<table class="def">
+  <tr>
+    <th>Name: </th>
+    <td>
+      <dfn data-dfn-type="property" data-export="" id="def-elements" dfn>
+        elements
+        <a class="self-link" href="#def-elements"></a>
+      </dfn>
+    </td>
+  </tr>
+  <tr>
+    <th>URI: </th>
+    <td>`https://w3id.org/rtc#elements`</td>
+  </tr>
+  <tr>
+    <th>Description: </th>
+    <td>The set of all triples of a compound. The objects must be RDF triples.</td>
+  </tr>
+  <tr>
+  <th>Domain: </th>
+  <td>[=Compound=]</td>
+</tr>
+<tr>
+  <th>Range: </th>
+  <td>-</td>
+</tr>
+<tr>
+  <th>Inverse of: </th>
+  <td>[=element of=]</td>
+</tr>
+
+</table>
+<table class="def">
+  <tr>
+    <th>Name: </th>
+    <td>
+      <dfn data-dfn-type="property" data-export="" id="def-sub-compounds_of" dfn>
+        sub-compounds of
+        <a class="self-link" href="#def-sub-compounds_of"></a>
+      </dfn>
+    </td>
+  </tr>
+  <tr>
+    <th>URI: </th>
+    <td>`https://w3id.org/rtc#subCompoundOf`</td>
+  </tr>
+  <tr>
+    <th>Description: </th>
+    <td>The subject compound is a sub-compound of the object compound, i.e. all triples of the sub-compound are elements of the super-compound.</td>
+  </tr>
+  <tr>
+  <th>Domain: </th>
+  <td>[=Compound=]</td>
+</tr>
+<tr>
+  <th>Range: </th>
+  <td>[=Compound=]</td>
+</tr>
+<tr>
+  <th>Inverse of: </th>
+  <td>-</td>
+</tr>
+
+</table>
+
+
