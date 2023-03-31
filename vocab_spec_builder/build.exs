@@ -1,7 +1,6 @@
 Mix.install([
-  {:rtc, path: "../src/rtc"},
-  {:rdf, "~> 1.0"}
-
+  {:rtc, "~> 0.1"},
+  {:rdf, "~> 1.1"}
 ])
 
 defmodule VocabSpec do
