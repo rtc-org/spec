@@ -113,7 +113,7 @@
   </tr>
   <tr>
     <th>Description: </th>
-    <td>The subject compound is a sub-compound of the object compound, i.e. all triples of the sub-compound are elements of the super-compound.</td>
+    <td>The subject compound is a sub-compound of the object compound, which means all triples of the sub-compound are elements of the super-compound and all statements about the super-compound also apply to the sub-compound.</td>
   </tr>
   <tr>
   <th>Domain: </th>

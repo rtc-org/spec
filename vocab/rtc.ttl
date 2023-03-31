@@ -3,13 +3,22 @@
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix dct: <http://purl.org/dc/terms/> .
 
-rtc:Compound a rdfs:Class
+<https://w3id.org/rtc#> a owl:Ontology
+        ; rdfs:label "RDF triple compounds vocabulary"
+        ; dct:title "RDF triple compounds vocabulary"
+        ; rdfs:comment "Vocabulary for defining sets of annotatable triples"
+        ; dct:created "2023-03-31"^^xsd:date
+.
+
+
+rtc:Compound a rdfs:Class, owl:Class
         ; rdfs:label "Compound"
         ; rdfs:comment "A compound is a set of triples as an RDF resource."
 .
 
-rtc:elementOf a rdf:Property
+rtc:elementOf a rdf:Property, owl:ObjectProperty
         ; rdfs:label "element of"
         ; rdfs:comment "Assigns a triple to a compound as an element. The subject must be a RDF triple."
         ; rdfs:range rtc:Compound
@@ -23,9 +32,9 @@ rtc:elements a rdf:Property
         ; owl:inverseOf rtc:elementOf
 .
 
-rtc:subCompoundOf a rdf:Property
+rtc:subCompoundOf a rdf:Property, owl:ObjectProperty
         ; rdfs:label "sub-compounds of"
-        ; rdfs:comment "The subject compound is a sub-compound of the object compound, i.e. all triples of the sub-compound are elements of the super-compound."
+        ; rdfs:comment "The subject compound is a sub-compound of the object compound, which means all triples of the sub-compound are elements of the super-compound and all statements about the super-compound also apply to the sub-compound."
         ; rdfs:domain rtc:Compound
         ; rdfs:range  rtc:Compound
 .
