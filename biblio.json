@@ -1,0 +1,17 @@
+{
+	"rdf-star": {
+		"authors": [
+			"Olaf Hartig",
+			"Pierre-Antoine Champin",
+			"Gregg Kellogg",
+			"Pierre-Antoine Champin"
+		],
+		"href": "https://w3c.github.io/rdf-star/cg-spec/2021-12-17.html",
+		"title": "RDF-star and SPARQL-star",
+		"status": "Final Community Group Report",
+		"publisher": "RDF-DEV Community Group",
+		"deliveredBy": [
+			"https://www.w3.org/groups/cg/rdf-dev"
+		]
+	}
+}

@@ -1,0 +1,156 @@
+<pre class='metadata'>
+Title: RDF Triple Compounds
+Shortname: RTC
+Level: 1
+Status: LS
+URL: https://w3id.org/rtc
+Repository: rtc-org/spec
+Editor: Marcel Otto
+Abstract: This document defines the concept of a triple compound as a set of RDF statements. Since RDF graphs are basically just sets of triples, triple compounds can be understood as logical RDF graphs inside of physical RDF graphs. Above this, a way for a further nesting of compound structures is defined.
+Markup Shorthands: markdown yes
+Markup Shorthands: dfn yes
+Markup Shorthands: css no
+</pre>
+
+Introduction {#intro}
+=====================
+
+The RDF-star extension [[!RDF-star]] of RDF [[RDF-Concepts]] provides a solution to the problem of how to make statements about statements, which occurs in several situations, e.g. when we want to state assertions about the certainty or provenance of some statements. 
+
+Sometimes, however, we have a bunch of triples we want to annotate. For example, if we get a set of triples from a form like these:
+
+```turtle
+PREFIX : <http://www.example.org/>
+ 
+:employee38 
+    :firstName "John" ;
+    :familyName "Smith" ;
+    :jobTitle "Assistant Designer" .
+```
+
+If we want to store these statements now with provenance information to capture when they were created and by whom, we're faced with the problem that we can only annotate a single triple. So, we could try this approach:
+
+```turtle
+PREFIX : <http://www.example.org/>
+ 
+:employee38 
+    :firstName "John" {| :statedBy :bob ; :statedAt "2022-02-16" |} ;
+    :familyName "Smith" {| :statedBy :bob ; :statedAt "2022-02-16" |} ;
+    :jobTitle "Assistant Designer" {| :statedBy :bob ; :statedAt "2022-02-16" |} .
+```
+
+Not only is the repetition of the provenance annotations in this approach problematic in terms of space and maintenance, it also doesn't model the situation correctly. These statements weren't stated independently just coincidental at the same time by the same person, but as a whole. 
+
+A better approach would be to introduce a new node that represents the set of statements as a dedicated resource, and assign the triples as elements to this resource using RDF-star statements.
+This vocabulary defines a class and properties for exactly this purpose.
+
+So, triple compounds are a general way to represent sets of triples inside a graph, i.e. named sub-graphs, and as such, might be useful in many use cases, for example:
+
+- for custom [bounded descriptions](https://patterns.dataincubator.org/book/bounded-description.html)
+- everywhere where named graphs are too course-grained or can not be used for other reasons
+
+By introducing a standard class and properties for this RDF-star usage pattern, it is possible to create more broadly reusable tools for this, in particular libraries offering an abstraction that allows to work with such compounds like normal graphs and deal with required annotations under the hood.
+
+
+
+Triple compounds {#triple-compounds}
+====================================
+
+A *triple compound* is a set of triples formed by assigning triples to a shared node.
+The triples are assigned to a compound with an RDF-star statement using the `rtc:elementOf` property.
+
+```turtle
+PREFIX : <http://www.example.org/>
+PREFIX rtc: <https://w3id.org/rtc#>
+ 
+:employee38 
+    :firstName "John" {| rtc:elementOf :compound1 |} ;
+    :familyName "Smith" {| rtc:elementOf :compound1 |} ;
+    :jobTitle "Assistant Designer" {| rtc:elementOf :compound1 |} .
+
+:compound1 a rtc:Compound ;
+    :statedBy :bob ; 
+    :statedAt "2022-02-16" .
+```
+
+Alternatively, the `rtc:elements`  property as the inverse of `rtc:elementOf` can be used.
+ 
+```turtle
+PREFIX : <http://www.example.org/>
+PREFIX rtc: <https://w3id.org/rtc#>
+ 
+:employee38 
+    :firstName "John" ;
+    :familyName "Smith" ;
+    :jobTitle "Assistant Designer" .
+
+:compound1 a rtc:Compound ;
+    :statedBy :bob ; 
+    :statedAt "2022-02-16" ;
+    rtc:elements        
+       << :employee38 :firstName "John" >> ,
+       << :employee38 :familyName "Smith" >> ,
+       << :employee38 :jobTitle "Assistant Designer" >> .
+```
+
+Note, that the `rdf:type` statement declaring the triple compound as a `rtc:Compound` explicitly is just used for educational purposes. It is not required and could be inferred from the use of the `rtc:elementOf` or `rtc:elements` properties having the `rtc:Compound` as its `rdfs:range` resp. `rdfs:domain`.
+
+The triples of a triple compound MUST be quoted triples. They MAY be asserted or unasserted triples.
+
+
+Sub-compounds {#sub-compounds}
+=====================
+
+Note: The triple compounds as described above can be used with any system implementing RDF-star. However, as the semantics of the following feature can not be expressed in RDFS, a proper interpretation relies on explicit implementations of the specified behaviour.
+
+A triple compound can be defined as a sub-compound of another one with the `rtc:subCompoundOf` property.
+The set of triples of the sub-compound MUST then be interpreted by an implementation as becoming a subset of the triples of the super-compound.
+All statements about the super-compound MUST be interpreted to also apply to all of its sub-compounds, except for the `rtc:elements` statements.
+
+For example, we could introduce a dedicated compound for all triples from a user and further structure this set with sub-compounds of triples stated at a certain date.
+
+```turtle
+PREFIX : <http://www.example.org/>
+PREFIX rtc: <https://w3id.org/rtc#>
+ 
+:employee38 
+    :firstName "John" ;
+    :familyName "Smith" ;
+    :jobTitle "Assistant Designer" .
+
+:employee39
+    :firstName "Jane" ;
+    :familyName "Doe" ;
+    :jobTitle "HR Manager" .
+
+:compound1 a rtc:Compound ;
+    :statedBy :bob .
+
+:compound2 
+    rtc:subCompoundOf :compound1 ;
+    :statedAt "2022-02-16" ;
+    rtc:elements        
+       << :employee38 :firstName "John" >> ,
+       << :employee38 :familyName "Smith" >> ,
+       << :employee38 :jobTitle "Assistant Designer" >> .
+
+:compound3
+    rtc:subCompoundOf :compound1 ;
+    :statedAt "2022-02-17" ;
+    rtc:elements        
+       << :employee39 :firstName "Jane" >> ,
+       << :employee39 :familyName "Doe" >> ,
+       << :employee39 :jobTitle "HR Manager" >> .
+
+```
+
+In an implementation, the `:statedBy :bob` statement is interpreted to become part of the sub-compounds `:compound2` and `:compound3` and the triples in `:compound2` and `:compound3` would become part of the triples in `:compound1`.
+
+
+Vocabulary {#vocab}
+===================
+
+<pre class=include>
+path: vocab_spec.bs
+</pre>
+
