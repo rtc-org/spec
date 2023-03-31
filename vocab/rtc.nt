@@ -1,0 +1,26 @@
+<https://w3id.org/rtc#> <http://purl.org/dc/terms/created> "2023-03-31"^^<http://www.w3.org/2001/XMLSchema#date> .
+<https://w3id.org/rtc#> <http://purl.org/dc/terms/title> "RDF triple compounds vocabulary" .
+<https://w3id.org/rtc#> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Ontology> .
+<https://w3id.org/rtc#> <http://www.w3.org/2000/01/rdf-schema#comment> "Vocabulary for defining sets of annotatable triples" .
+<https://w3id.org/rtc#> <http://www.w3.org/2000/01/rdf-schema#label> "RDF triple compounds vocabulary" .
+<https://w3id.org/rtc#Compound> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2000/01/rdf-schema#Class> .
+<https://w3id.org/rtc#Compound> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<https://w3id.org/rtc#Compound> <http://www.w3.org/2000/01/rdf-schema#comment> "A compound is a set of triples as an RDF resource." .
+<https://w3id.org/rtc#Compound> <http://www.w3.org/2000/01/rdf-schema#label> "Compound" .
+<https://w3id.org/rtc#elementOf> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<https://w3id.org/rtc#elementOf> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<https://w3id.org/rtc#elementOf> <http://www.w3.org/2000/01/rdf-schema#comment> "Assigns a triple to a compound as an element. The subject must be a RDF triple." .
+<https://w3id.org/rtc#elementOf> <http://www.w3.org/2000/01/rdf-schema#label> "element of" .
+<https://w3id.org/rtc#elementOf> <http://www.w3.org/2000/01/rdf-schema#range> <https://w3id.org/rtc#Compound> .
+<https://w3id.org/rtc#elementOf> <http://www.w3.org/2002/07/owl#inverseOf> <https://w3id.org/rtc#elements> .
+<https://w3id.org/rtc#elements> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<https://w3id.org/rtc#elements> <http://www.w3.org/2000/01/rdf-schema#comment> "The set of all triples of a compound. The objects must be RDF triples." .
+<https://w3id.org/rtc#elements> <http://www.w3.org/2000/01/rdf-schema#domain> <https://w3id.org/rtc#Compound> .
+<https://w3id.org/rtc#elements> <http://www.w3.org/2000/01/rdf-schema#label> "elements" .
+<https://w3id.org/rtc#elements> <http://www.w3.org/2002/07/owl#inverseOf> <https://w3id.org/rtc#elementOf> .
+<https://w3id.org/rtc#subCompoundOf> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<https://w3id.org/rtc#subCompoundOf> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<https://w3id.org/rtc#subCompoundOf> <http://www.w3.org/2000/01/rdf-schema#comment> "The subject compound is a sub-compound of the object compound, which means all triples of the sub-compound are elements of the super-compound and all statements about the super-compound also apply to the sub-compound." .
+<https://w3id.org/rtc#subCompoundOf> <http://www.w3.org/2000/01/rdf-schema#domain> <https://w3id.org/rtc#Compound> .
+<https://w3id.org/rtc#subCompoundOf> <http://www.w3.org/2000/01/rdf-schema#label> "sub-compounds of" .
+<https://w3id.org/rtc#subCompoundOf> <http://www.w3.org/2000/01/rdf-schema#range> <https://w3id.org/rtc#Compound> .
