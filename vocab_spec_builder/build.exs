@@ -8,6 +8,8 @@ defmodule VocabSpec do
   alias RDF.{Description, Graph}
   alias RDF.NS.{RDFS, OWL}
 
+  @ontology RTC.NS.RTC.__base_iri__()
+
   @classes [
     RTC.NS.RTC.Compound
   ]
@@ -35,7 +37,7 @@ defmodule VocabSpec do
   end
 
   defp check_unspecified_resources!(vocab) do
-    unspecified_resources = Graph.delete_subjects(vocab, @classes ++ @properties)
+    unspecified_resources = Graph.delete_subjects(vocab, [@ontology | @classes ++ @properties])
 
     unless Enum.empty?(unspecified_resources) do
       raise "vocab contains unspecified resources: #{inspect(unspecified_resources)}"
