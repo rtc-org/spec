@@ -150,6 +150,10 @@ In an implementation, the `:statedBy :bob` statement is interpreted to become pa
 Vocabulary {#vocab}
 ===================
 
+<span><a href="vocab/rtc.ttl" target="_blank"><img src="https://img.shields.io/badge/Format-Turtle-blue.svg" alt="Turtle"></a> </span>
+<span><a href="vocab/rtc.nt"  target="_blank"><img src="https://img.shields.io/badge/Format-NTriples-blue.svg" alt="N-Triples"></a> </span>
+<span><a href="vocab/rtc.rdf" target="_blank"><img src="https://img.shields.io/badge/Format-RDF/XML-blue.svg" alt="RDF/XML"></a> </span>
+
 <pre class=include>
 path: vocab_spec.bs
 </pre>
